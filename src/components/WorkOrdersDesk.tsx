@@ -173,7 +173,7 @@ export const WorkOrdersDesk: React.FC<WorkOrdersDeskProps> = ({
       patientEmail: patientEmail.trim() || undefined,
       collectionDateTime, // Mandatory field
       clientId: targetClient.id,
-      clientName: targetClient.name || targetClient.facilityName || 'Client Facility',
+      clientName: targetClient.name || ('facilityName' in targetClient ? (targetClient as User).facilityName : undefined) || 'Client Facility',
       clientFacilityType: targetClient.facilityType || 'DSA',
       // Revenue Attribution: Flows directly to this staff member
       staffId: assignedStaff.id,

@@ -73,9 +73,13 @@ export default function App() {
     const targetUser = allUsers.find(u => u.role === role);
     if (targetUser) {
       setCurrentUser(targetUser);
-      const url = new URL(window.location.href);
-      url.searchParams.set('role', role);
-      window.history.replaceState({}, '', url.toString());
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('role', role);
+        window.history.replaceState({}, '', url.toString());
+      } catch (e) {
+        console.warn('Unable to update history URL state:', e);
+      }
 
       // If active tab is manager-only and user switches to staff or client, fall back to dashboard
       if (['staff_mapping', 'audit_logs'].includes(activeTab) && role !== 'manager') {

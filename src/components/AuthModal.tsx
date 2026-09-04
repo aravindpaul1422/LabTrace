@@ -56,11 +56,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const roleUsers = allUsers.filter(u => u.role === selectedRole);
 
   const handleCopyPortalLink = () => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('role', selectedRole);
-    navigator.clipboard.writeText(url.toString());
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2000);
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('role', selectedRole);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url.toString()).catch(() => {});
+      }
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2000);
+    } catch (e) {
+      console.warn('Could not copy link:', e);
+    }
   };
 
   const handleRegister = (e: React.FormEvent) => {

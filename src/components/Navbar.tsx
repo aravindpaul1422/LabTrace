@@ -45,11 +45,17 @@ export const Navbar: React.FC<NavbarProps> = ({
   const unreadCount = notifications.filter(n => !n.read).length;
 
   const copyRoleLink = (role: UserRole) => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('role', role);
-    navigator.clipboard.writeText(url.toString());
-    setCopiedLinkRole(role);
-    setTimeout(() => setCopiedLinkRole(null), 2000);
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('role', role);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url.toString()).catch(() => {});
+      }
+      setCopiedLinkRole(role);
+      setTimeout(() => setCopiedLinkRole(null), 2000);
+    } catch (e) {
+      console.warn('Clipboard copy error:', e);
+    }
   };
 
   return (
