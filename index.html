@@ -68,7 +68,33 @@
         </div>
       </div>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (function() {
+        var timeoutId = setTimeout(function() {
+          var loader = document.getElementById('initial-loader');
+          if (loader && document.getElementById('root') && document.getElementById('root').contains(loader)) {
+            loader.innerHTML = '<div style="max-width: 440px; margin: 0 16px; padding: 28px; background: #0f172a; border: 1px solid #1e293b; border-radius: 16px; text-align: center; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">' +
+              '<div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); color: #38bdf8; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto; font-size: 22px;">⚙️</div>' +
+              '<div style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 8px;">GitHub Pages Deployment Notice</div>' +
+              '<div style="font-size: 13px; color: #94a3b8; line-height: 1.6; margin-bottom: 20px; text-align: left;">' +
+                'This Vite React application requires a build step. In your repository on GitHub:<br/><br/>' +
+                '1. Go to <b>Settings &rarr; Pages</b><br/>' +
+                '2. Under <i>Source</i>, select <b>GitHub Actions</b><br/>' +
+                '3. Push changes or run the workflow in the <b>Actions</b> tab' +
+              '</div>' +
+              '<div style="display: flex; gap: 8px; justify-content: center;">' +
+                '<button onclick="window.location.reload()" style="padding: 9px 18px; background: #0284c7; hover:background: #0369a1; color: #ffffff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Refresh Portal</button>' +
+              '</div>' +
+            '</div>';
+          }
+        }, 5000);
+
+        window.addEventListener('error', function(e) {
+          console.error('Portal startup error:', e);
+        });
+      })();
+    </script>
+    <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>
 
