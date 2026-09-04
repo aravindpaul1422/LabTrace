@@ -1,0 +1,6 @@
+{
+  "name": "SecondMedic Diagnostics Network",
+  "description": "Integrated B2B diagnostics lab network operating system with role-based access for Managers, Staff, and Clients (including DSA), staff revenue attribution, audit logging, and central result verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
